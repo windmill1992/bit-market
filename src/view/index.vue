@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getList() {
-            this.$axios.post(`${baseUrl}/market-rest/market-info-list-v2`, { marketType: 1, pageIndex: 1, pageSize: 30 })
+            this.$axios.post(`${baseUrl}/market/market-rest/market-info-list-v2`, { marketType: 1, pageIndex: 1, pageSize: 30 })
             .then(res => {
                 if(res.data.code == 0 && res.data.success){
                     if(res.data.data){
@@ -66,7 +66,7 @@ export default {
             })
         },
         getPrice() {
-            this.$axios.get(`${baseUrl}/market-rest/realtime-one-point`, { params: { marketType: 1, kindList: this.codelist.join(',') } })
+            this.$axios.get(`${baseUrl}/market/market-rest/realtime-one-point`, { params: { marketType: 1, kindList: this.codelist.join(',') } })
             .then(res => {
                 if(res.data.code == 0 && res.data.success){
                     console.log(res.data.data);

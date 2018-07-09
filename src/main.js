@@ -9,7 +9,9 @@ Vue.config.productionTip = false
 
 axios.defaults.headers = {
   lang: 'cn',
-  legalTende: 1
+  legalTende: 1,
+  applicationId: 2,
+  applicationClientType: 1,
 }
 Vue.prototype.$axios = axios
 
