@@ -2,8 +2,8 @@
     <div>
         <table class="tb">
             <tr>
-                <th>市值排名</th>
-                <th>名称</th>
+                <th class="cen">市值排名</th>
+                <th class="cen">名称</th>
                 <th>最新价</th>
                 <th>最高</th>
                 <th>最低</th>
@@ -13,8 +13,8 @@
                 <th>流通市值</th>
             </tr>
             <tr v-for="item in list" :key="item.kindCode">
-                <td>{{item.capitalizationSort}}</td>
-                <td>{{item.kind}}</td>
+                <td class="cen">{{item.capitalizationSort}}</td>
+                <td class="cen">{{item.kind}}</td>
                 <td class="new">¥{{item.priceCNY | numFmt3}}</td>
                 <td class="max">¥{{item.maxPriceCNY | numFmt3}}</td>
                 <td class="max">¥{{item.minPriceCNY | numFmt3}}</td>
@@ -69,7 +69,6 @@ export default {
             this.$axios.get(`${baseUrl}/market/market-rest/realtime-one-point`, { params: { marketType: 1, kindList: this.codelist.join(',') } })
             .then(res => {
                 if(res.data.code == 0 && res.data.success){
-                    console.log(res.data.data);
                     if(res.data.data){
                         for(let v of res.data.data){
                             for(let t of this.templist){
@@ -132,20 +131,27 @@ html, body{
 .tb{
     width: 100%;
     border: none;
-    text-align: center;
+    text-align: right;
     background: #000;
     padding-bottom: 5px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+.tb .cen{
+    text-align: center;
 }
 .tb th{
     color: #999;
     height: 30px;
     line-height: 30px;
+    padding: 0;
 }
 .tb td{
     color: #fff;
     height: 20px;
     line-height: 20px;
     font-size: 12px;
+    padding: 0;
 }
 .tb .new{
     color: #c52b18;
