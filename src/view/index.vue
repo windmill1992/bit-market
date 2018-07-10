@@ -5,8 +5,8 @@
                 <th class="cen">市值排名</th>
                 <th class="cen">名称</th>
                 <th>最新价</th>
-                <th>最高</th>
-                <th>最低</th>
+                <th>最高价</th>
+                <th>最低价</th>
                 <th>24H涨跌</th>
                 <th>成交量</th>
                 <th>成交额</th>
@@ -15,7 +15,9 @@
             <tr v-for="item in list" :key="item.kindCode">
                 <td class="cen">{{item.capitalizationSort}}</td>
                 <td class="cen">{{item.kind}}</td>
-                <td class="new">¥{{item.priceCNY | numFmt3}}</td>
+                <td class="new up" v-if="item.rose > 0">¥{{item.priceCNY | numFmt3}}</td>
+                <td class="new down" v-else-if="item.rose < 0">¥{{item.priceCNY | numFmt3}}</td>
+                <td class="new" v-else>¥{{item.priceCNY | numFmt3}}</td>
                 <td class="max">¥{{item.maxPriceCNY | numFmt3}}</td>
                 <td class="max">¥{{item.minPriceCNY | numFmt3}}</td>
                 <td class="rose up" v-if="item.rose > 0">+{{item.rose | numFmt2}}%</td>
@@ -37,7 +39,7 @@ export default {
             list: [],
             curIndex: 0,
             templist: [],
-            codelist: []
+            codelist: [],
         }
     },
     methods: {
@@ -59,10 +61,8 @@ export default {
                         this.getPrice();
                     }
                 }else{
-
+                    console.log('服务器错误！');
                 }
-            }).catch(() => {
-
             })
         },
         getPrice() {
@@ -81,6 +81,8 @@ export default {
                         }
                         this.list = this.templist;
                     }
+                }else{
+                    console.log('服务器错误！');
                 }
             })
         }
@@ -115,8 +117,7 @@ export default {
         this.getList();
         setInterval(() => {
             this.getList();
-        }, 60000);
-        
+        }, 10000);
     }
 }
 </script>
@@ -153,16 +154,10 @@ html, body{
     font-size: 12px;
     padding: 0;
 }
-.tb .new{
-    color: #c52b18;
+.up{
+    color: #00ac1e!important;
 }
-.tb .max{
-    color: #00ac1e;
-}
-.tb .rose.up{
-    color: #00ac1e;
-}
-.tb .rose.down{
-    color: #c52b18;
+.down{
+    color: #c52b18!important;
 }
 </style>
