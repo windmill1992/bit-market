@@ -117,7 +117,7 @@ export default {
         this.getList();
         setInterval(() => {
             this.getList();
-        }, 10000);
+        }, 60000);
     }
 }
 </script>
