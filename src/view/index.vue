@@ -24,7 +24,7 @@
                 <td class="rose down" v-else-if="item.rose < 0">{{item.rose | numFmt2}}%</td>
                 <td class="rose" v-else>{{item.rose | numFmt2}}%</td>
                 <td>{{item.volume | numFmt}}</td>
-                <td>{{item.turnoverCNY | numFmt}}</td>
+                <td>¥{{item.turnoverCNY | numFmt}}</td>
                 <td>¥{{item.capitalization | numFmt}}</td>
             </tr>
         </table>
